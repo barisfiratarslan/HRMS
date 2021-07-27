@@ -18,32 +18,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.PositionTitleService;
+import kodlamaio.hrms.business.abstracts.EmployeeService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
-import kodlamaio.hrms.entities.concretes.PositionTitle;
+import kodlamaio.hrms.entities.concretes.Employee;
+import kodlamaio.hrms.fakeServices.MernisService;
 
 @RestController
-@RequestMapping("/api/positiontitles")
-public class PositionTitleController {
-	
-	private PositionTitleService positionTitleService;
-	
+@RequestMapping("/api/employees")
+public class EmployeeController {
+
+	private EmployeeService employeeService;
+
 	@Autowired
-	public PositionTitleController(PositionTitleService positionTitleService) {
+	public EmployeeController(EmployeeService employeeService) {
 		super();
-		this.positionTitleService = positionTitleService;
+		this.employeeService = employeeService;
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<PositionTitle>> getAll(){
-		return this.positionTitleService.getAll();
+	public DataResult<List<Employee>> getAll(){
+		return this.employeeService.getAll();
 	}
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody PositionTitle positionTitle){
-		return this.positionTitleService.addPositionTitle(positionTitle);
+	public Result add(@Valid @RequestBody Employee employee){
+		return this.employeeService.addEmployee(employee);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
